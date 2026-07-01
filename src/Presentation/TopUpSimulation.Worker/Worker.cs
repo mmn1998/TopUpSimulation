@@ -75,9 +75,9 @@ public class Worker : BackgroundService
                 }
                 catch (Exception e)
                 {
-                    throw new TopUpException(e.Message, e);
+                    _logger.LogError(e, e.Message);
+                    continue;
                 }
-
             }
         }
     }

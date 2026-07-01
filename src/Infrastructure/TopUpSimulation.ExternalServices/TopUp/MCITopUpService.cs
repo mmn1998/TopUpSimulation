@@ -21,7 +21,7 @@ public class MCITopUpService : ITopUpService
     {
         _restfulClient = restfulClient;
         _logger = logger;
-        _mCITopUpSetting = mCITopUpSettingoption.Value ?? throw TopUpResultException.ConfigureErrorrror;
+        _mCITopUpSetting = mCITopUpSettingoption.Value ?? throw TopUpResultException.ConfigureError;
     }
     public async Task<InstantChargeResponse> InstantCharge(InstantChargeRequest request)
     {
