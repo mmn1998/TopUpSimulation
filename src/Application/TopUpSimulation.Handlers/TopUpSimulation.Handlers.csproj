@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\TopUpSimulation.Framework.Logger\TopUpSimulation.Framework.Logger.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\TopUpSimulation.Persistence\TopUpSimulation.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

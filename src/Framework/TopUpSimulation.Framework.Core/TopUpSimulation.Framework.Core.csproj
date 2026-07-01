@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TopUpSimulation.Framework.Common\TopUpSimulation.Framework.Common.csproj" />
+  </ItemGroup>
+
 </Project>

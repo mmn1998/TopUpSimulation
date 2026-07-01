@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\TopUpSimulation.Domain\TopUpSimulation.Domain.csproj" />
+    <ProjectReference Include="..\..\Framework\TopUpSimulation.Framework.Infrastructure\TopUpSimulation.Framework.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

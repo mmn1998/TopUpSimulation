@@ -10,4 +10,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\TopUpSimulation.Handlers\TopUpSimulation.Handlers.csproj" />
+    <ProjectReference Include="..\..\Framework\TopUpSimulation.Framework.Presentation\TopUpSimulation.Framework.Presentation.csproj" />
+  </ItemGroup>
 </Project>
