@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\TopUpSimulation.Framework.Logger\TopUpSimulation.Framework.Logger.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\TopUpSimulation.ExternalServices\TopUpSimulation.ExternalServices.csproj" />
     <ProjectReference Include="..\..\Infrastructure\TopUpSimulation.Persistence\TopUpSimulation.Persistence.csproj" />
     <ProjectReference Include="..\TopUpSimulation.Handlers.Contracts\TopUpSimulation.Handlers.Contracts.csproj" />
   </ItemGroup>
