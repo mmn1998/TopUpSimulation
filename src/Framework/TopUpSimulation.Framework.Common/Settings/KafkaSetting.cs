@@ -3,7 +3,7 @@
 public class KafkaSetting
 {
     public ProducerConfig ProducerConfigs { get; set; } = default!;
-    public ConsumerConfig ConsumerConfig { get; set; } = default!;
+    public ConsumerConfig ConsumerConfigs { get; set; } = default!;
 }
 public class ProducerConfig
 {

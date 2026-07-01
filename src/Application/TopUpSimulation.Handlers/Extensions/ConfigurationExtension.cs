@@ -34,8 +34,8 @@ public static class ConfigurationExtension
         {
             var config = new Confluent.Kafka.ConsumerConfig
             {
-                BootstrapServers = kafkaSetting.ConsumerConfig.BootstrapServers,
-                GroupId = kafkaSetting.ConsumerConfig.GroupId,
+                BootstrapServers = kafkaSetting.ConsumerConfigs.BootstrapServers,
+                GroupId = kafkaSetting.ConsumerConfigs.GroupId,
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
 

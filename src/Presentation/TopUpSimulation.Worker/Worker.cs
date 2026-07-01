@@ -16,32 +16,29 @@ namespace TopUpSimulation.Worker;
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
-    private readonly ITransactionRepository _transactionRepository;
-    private readonly IOutBoxRepository _outBoxRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ITopUpService _topUpService;
-    private readonly IEventPublisher _eventPublisher;
+    private readonly IServiceProvider _serviceProvider;
 
-    public Worker(ILogger<Worker> logger, ITransactionRepository transactionRepository, IOutBoxRepository outBoxRepository,
-        IUnitOfWork unitOfWork, ITopUpService topUpService, IEventPublisher eventPublisher)
+    public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider)
     {
         _logger = logger;
-        _transactionRepository = transactionRepository;
-        _outBoxRepository = outBoxRepository;
-        _unitOfWork = unitOfWork;
-        _topUpService = topUpService;
-        _eventPublisher = eventPublisher;
+        _serviceProvider = serviceProvider;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        using var scope = _serviceProvider.CreateScope();
+        var eventPublisher = scope.ServiceProvider.GetService<IEventPublisher>();
+        var outBoxRepository = scope.ServiceProvider.GetRequiredService<IOutBoxRepository>();
+        var topUpService = scope.ServiceProvider.GetRequiredService<ITopUpService>();
+        var transactionRepository = scope.ServiceProvider.GetRequiredService<ITransactionRepository>();
+        var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
         while (!stoppingToken.IsCancellationRequested)
         {
             if (_logger.IsEnabled(LogLevel.Information))
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             }
-            var remainedEvents = await _outBoxRepository.GetAll(x => !x.IsProcessed).ToListAsync();
+            var remainedEvents = await outBoxRepository.GetAll(x => !x.IsProcessed).ToListAsync();
             _logger.LogInformation($"{remainedEvents.Count} events found");
             foreach (var remainedEvent in remainedEvents)
             {
@@ -51,25 +48,25 @@ public class Worker : BackgroundService
                     var topUpChargeRequest = JsonConvert.DeserializeObject<InstantChargeRequest>(remainedEvent.TopUpChargeRequest);
                     if (topUpChargeRequest == null) throw TopUpResultException.DeserializeError;
 
-                    var chargeResponse = await _topUpService.InstantCharge(topUpChargeRequest);
+                    var chargeResponse = await topUpService.InstantCharge(topUpChargeRequest);
                     if (chargeResponse == null) throw TopUpResultException.TopUpChargeError;
                     _logger.LogInformation($"charge service called and the response is : {JsonConvert.SerializeObject(chargeResponse)}");
                     #region add transaction
                     var transactionArg = new CreateTransactionArg(request: remainedEvent.TopUpChargeRequest,
                         response: JsonConvert.SerializeObject(chargeResponse), successfull: chargeResponse.isSuccessful);
                     var transaction = Transaction.Create(transactionArg);
-                    await _transactionRepository.AddAsync(transaction);
+                    await transactionRepository.AddAsync(transaction);
                     _logger.LogInformation($"transaction with value : {JsonConvert.SerializeObject(transaction)} has created");
                     #endregion
                     #region publish event
                     var @event = new TopUpRespondedEvent(correlationId: transaction.Id,
                         occurredOn: transaction.CreatedAt, finishPayment: chargeResponse.isSuccessful);
-                    _eventPublisher.PublishAsync(@event, stoppingToken);
+                    eventPublisher.PublishAsync(@event, stoppingToken);
                     _logger.LogInformation($"event with value : {JsonConvert.SerializeObject(@event)} has published on kafka");
                     #endregion
                     #region final update
                     remainedEvent.ProcessedCompleted();
-                    await _unitOfWork.SaveChangesAsync();
+                    await unitOfWork.SaveChangesAsync();
                     _logger.LogInformation($"all changes commited to database");
                     #endregion
                 }
