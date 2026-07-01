@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SIMA.Framework.Core.Entities;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using TopUpSimulation.Framework.Core.Contracts;
+using TopUpSimulation.Framework.Core.Entities;
 
 namespace SIMA.Framework.Infrastructure.Data;
 
@@ -15,13 +17,22 @@ public class Repository<T> : IRepository<T> where T : Entity
         _dbSet = context.Set<T>();
     }
 
-    public virtual async Task Add(T entity)
+    public virtual async Task AddAsync(T entity)
     {
         await _dbSet.AddAsync(entity);
     }
 
-    public virtual void Remove(T entity)
+    public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
     {
-        _dbSet.Remove(entity);
+        IQueryable<T> query = _dbSet;
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+        if (orderby != null)
+        {
+            return orderby(query);
+        }
+        return query;
     }
 }
