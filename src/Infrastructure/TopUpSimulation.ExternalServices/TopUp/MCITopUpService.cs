@@ -25,6 +25,10 @@ public class MCITopUpService : ITopUpService
     }
     public async Task<InstantChargeResponse> InstantCharge(InstantChargeRequest request)
     {
+        if (_mCITopUpSetting.MockService)
+        {
+            return new InstantChargeResponse(true);
+        }
         var url = $"{_mCITopUpSetting.BaseUrl}{_mCITopUpSetting.InstantCharge}";
         var headers = GetDefaultHeaders();
         return await _restfulClient.PostAsync<InstantChargeResponse, InstantChargeRequest>(actionUrl: url, request: request, headers: headers);
