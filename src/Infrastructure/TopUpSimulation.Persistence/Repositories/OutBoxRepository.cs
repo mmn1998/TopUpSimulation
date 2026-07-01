@@ -14,6 +14,7 @@ public class OutBoxRepository : Repository<TopUpOutBox>, IOutBoxRepository
     {
         _context = context;
     }
+
     public async Task<bool> CheckExist(Guid correlationId)
     {
         return await _context.TopUpOutBoxes.AnyAsync(x => x.CorrelationId == correlationId);
