@@ -9,13 +9,13 @@ public class Transaction : Entity
     {
 
     }
-    private Transaction(CreateTopUpArg arg)
+    private Transaction(CreateTransactionArg arg)
     {
         TopUpRequest = arg.request;
         TopUpResponse = arg.response;
         Successful = arg.successfull;
     }
-    public static Transaction Create(CreateTopUpArg arg)
+    public static Transaction Create(CreateTransactionArg arg)
     {
         return new Transaction(arg);
     }

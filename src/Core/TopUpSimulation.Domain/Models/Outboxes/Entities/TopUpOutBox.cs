@@ -14,12 +14,18 @@ public class TopUpOutBox : Entity
         CorrelationId = arg.correlationId;
         IsProcessed = arg.isProcessed;
         TopUpChargeRequest = arg.topUpChargeRequest;
+        OccurredOn = arg.occurredOn;
     }
     public static TopUpOutBox Create(CreateOutBoxArg arg)
     {
         return new TopUpOutBox(arg);
     }
+    public void ProcessedCompleted()
+    {
+        IsProcessed = true;
+    }
     public Guid CorrelationId { get; init; }
-    public bool IsProcessed { get; init; }
+    public bool IsProcessed { get; private set; }
     public string TopUpChargeRequest { get; init; }
+    public DateTime OccurredOn { get; init; }
 }

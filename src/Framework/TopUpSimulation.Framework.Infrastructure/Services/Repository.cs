@@ -22,7 +22,7 @@ public class Repository<T> : IRepository<T> where T : Entity
         await _dbSet.AddAsync(entity);
     }
 
-    public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
+    public IQueryable<T> GetAll(Expression<Func<T, bool>>? filter = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null)
     {
         IQueryable<T> query = _dbSet;
         if (filter != null)
