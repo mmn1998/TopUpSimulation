@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopUpSimulation.Worker", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopUpSimulation.Handlers.Contracts", "src\Application\TopUpSimulation.Handlers.Contracts\TopUpSimulation.Handlers.Contracts.csproj", "{12395CC6-46D1-48D0-9DA4-F5E2545B8770}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopUpSimulation.ExternalServices", "src\Infrastructure\TopUpSimulation.ExternalServices\TopUpSimulation.ExternalServices.csproj", "{4A4AD0F2-3020-4ED8-8081-2F93C13FA0FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{12395CC6-46D1-48D0-9DA4-F5E2545B8770}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12395CC6-46D1-48D0-9DA4-F5E2545B8770}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12395CC6-46D1-48D0-9DA4-F5E2545B8770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A4AD0F2-3020-4ED8-8081-2F93C13FA0FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A4AD0F2-3020-4ED8-8081-2F93C13FA0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A4AD0F2-3020-4ED8-8081-2F93C13FA0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A4AD0F2-3020-4ED8-8081-2F93C13FA0FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{30FF2CC4-1DFF-41B1-A722-332A71184F4F} = {87C7B02B-F133-4227-9309-83F573C0261F}
 		{3F7E53D1-29F0-464C-9450-072A1794C2A3} = {DE99524F-2B5E-4C68-96A2-5B7418D7355E}
 		{12395CC6-46D1-48D0-9DA4-F5E2545B8770} = {D54ECE21-64CE-480F-8956-28E669C3D162}
+		{4A4AD0F2-3020-4ED8-8081-2F93C13FA0FC} = {212D6C14-FA48-4C7B-A22E-A8810595827B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8D8B925-1330-43EB-B45F-6FB576F9060B}
