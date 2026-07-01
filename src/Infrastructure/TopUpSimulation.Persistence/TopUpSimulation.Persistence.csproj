@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Application\TopUpSimulation.Handlers.Contracts\TopUpSimulation.Handlers.Contracts.csproj" />
     <ProjectReference Include="..\..\Core\TopUpSimulation.Domain\TopUpSimulation.Domain.csproj" />
     <ProjectReference Include="..\..\Framework\TopUpSimulation.Framework.Infrastructure\TopUpSimulation.Framework.Infrastructure.csproj" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -40,6 +40,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopUpSimulation.Framework.Presentation", "src\Framework\TopUpSimulation.Framework.Presentation\TopUpSimulation.Framework.Presentation.csproj", "{30FF2CC4-1DFF-41B1-A722-332A71184F4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopUpSimulation.Worker", "src\Presentation\TopUpSimulation.Worker\TopUpSimulation.Worker.csproj", "{3F7E53D1-29F0-464C-9450-072A1794C2A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopUpSimulation.Handlers.Contracts", "src\Application\TopUpSimulation.Handlers.Contracts\TopUpSimulation.Handlers.Contracts.csproj", "{12395CC6-46D1-48D0-9DA4-F5E2545B8770}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{3F7E53D1-29F0-464C-9450-072A1794C2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F7E53D1-29F0-464C-9450-072A1794C2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F7E53D1-29F0-464C-9450-072A1794C2A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12395CC6-46D1-48D0-9DA4-F5E2545B8770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12395CC6-46D1-48D0-9DA4-F5E2545B8770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12395CC6-46D1-48D0-9DA4-F5E2545B8770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12395CC6-46D1-48D0-9DA4-F5E2545B8770}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{7FEE5923-85DE-412C-AE55-ADD41A69287B} = {87C7B02B-F133-4227-9309-83F573C0261F}
 		{30FF2CC4-1DFF-41B1-A722-332A71184F4F} = {87C7B02B-F133-4227-9309-83F573C0261F}
 		{3F7E53D1-29F0-464C-9450-072A1794C2A3} = {DE99524F-2B5E-4C68-96A2-5B7418D7355E}
+		{12395CC6-46D1-48D0-9DA4-F5E2545B8770} = {D54ECE21-64CE-480F-8956-28E669C3D162}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8D8B925-1330-43EB-B45F-6FB576F9060B}
