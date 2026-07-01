@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using SIMA.Framework.Infrastructure.RestfulClient;
 using System.Text;
 
 namespace TopUpSimulation.Framework.Common.RestfulClient;

@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\TopUpSimulation.Framework.Common\TopUpSimulation.Framework.Common.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TopUp\" />
+    <ProjectReference Include="..\..\Application\TopUpSimulation.Handlers.Contracts\TopUpSimulation.Handlers.Contracts.csproj" />
+    <ProjectReference Include="..\..\Framework\TopUpSimulation.Framework.Common\TopUpSimulation.Framework.Common.csproj" />
   </ItemGroup>
 
 </Project>

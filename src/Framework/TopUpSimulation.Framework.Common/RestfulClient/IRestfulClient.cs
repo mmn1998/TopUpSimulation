@@ -1,4 +1,4 @@
-namespace SIMA.Framework.Infrastructure.RestfulClient;
+namespace TopUpSimulation.Framework.Common.RestfulClient;
 
 public interface IRestfulClient
 {
