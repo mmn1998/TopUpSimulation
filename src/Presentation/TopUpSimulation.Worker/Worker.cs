@@ -17,11 +17,13 @@ public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
     private readonly IServiceProvider _serviceProvider;
+    private readonly int _retryThreshold;
 
-    public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider)
+    public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider, IConfiguration configuration)
     {
         _logger = logger;
         _serviceProvider = serviceProvider;
+        _retryThreshold = configuration.GetValue<int?>("RetryThreshold") ?? throw TopUpResultException.ConfigureError;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -49,7 +51,21 @@ public class Worker : BackgroundService
                     if (topUpChargeRequest == null) throw TopUpResultException.DeserializeError;
 
                     var chargeResponse = await topUpService.InstantCharge(topUpChargeRequest);
-                    if (chargeResponse == null) throw TopUpResultException.TopUpChargeError;
+                    if (chargeResponse == null)
+                    {
+                        var retryCounts = 0;
+                        while (retryCounts < _retryThreshold)
+                        {
+                            chargeResponse = await topUpService.InstantCharge(topUpChargeRequest);
+                            if (chargeResponse == null)
+                                retryCounts++;
+                            else break;
+
+                        }
+                        if (retryCounts >= _retryThreshold)
+                            throw TopUpResultException.TopUpChargeError;
+
+                    }
                     _logger.LogInformation($"charge service called and the response is : {JsonConvert.SerializeObject(chargeResponse)}");
                     #region add transaction
                     var transactionArg = new CreateTransactionArg(request: remainedEvent.TopUpChargeRequest,
